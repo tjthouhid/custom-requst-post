@@ -1,0 +1,18 @@
+.hide-gd-width {
+    display: none;
+}
+.hide-gd-height{
+    display: none;    
+}
+#gd_widthHelpBlock{
+    cursor: pointer;
+}
+#gd_heightHelpBlock{
+    cursor: pointer;
+}
+.error_gd_r_msg{
+    display: none;
+}
+.gd_request_thankyou{
+    display: none;
+}
