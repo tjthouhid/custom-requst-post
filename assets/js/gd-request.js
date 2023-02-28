@@ -73,4 +73,25 @@ jQuery(function($){
         $(".gd_request_thankyou").fadeOut();
         $('form#gd_product_request_form')[0].reset();
     });
+
+    if (window.location.href.indexOf('?removeemail=') > 0) {
+
+        $url = new URL(window.location.href);
+
+        var data = {
+            action: "gd_product_request_remove_email", 
+            id : $url.searchParams.get("removeemail"),
+        }
+      
+
+        $.ajax({
+            url: gdAjax.ajaxurl,
+            type: 'post',
+            // action: 'product_request_remove_email'
+            data: data,
+            success: function(data) {
+                $('#remove_Modal').modal('show');
+            }
+        });
+    }
 });
