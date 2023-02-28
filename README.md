@@ -1,8 +1,11 @@
-# custom-requst-post
 
+# Custom Product Request
 
-to add it to  modal
+Here User can request for product and it will ssend email when product available
 
+For Adding to modal 
+
+```html
 <div class="modal fade" id="request_Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -12,14 +15,24 @@ to add it to  modal
       <div class="modal-body">
       <?php echo do_shortcode("[gd-request-form]");?>
       </div>
-      
     </div>
   </div>
 </div>
-<div class="advise-text__copy" href="#" data-bs-toggle="modal" data-bs-target="#request_Modal">Need advice to find the size you require?</div> 
+```
+
+This is for trigger the modal
+```html
+data-bs-toggle="modal" data-bs-target="#request_Modal" 
+```
+
+And For Corn
+
+```php
+gd_check_request_product
+```
 
 
- for adding to corn jobs action is 
- gd_check_request_product
+## License
 
+[Tj Thouhid](https://github.com/tjthouhid/custom-requst-post/)
 
