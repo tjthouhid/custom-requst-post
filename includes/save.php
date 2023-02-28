@@ -83,7 +83,8 @@ function gd_product_request_check(){
     $customer['found'] = get_post_meta($id, 'found', true);
     $customer['date_override'] = 'all';
 
-    gdSearchRequest::check_for_products($customer);
+    (new gdSearchRequest)->check_for_products($customer);
+    //gdSearchRequest::check_for_products($customer);
     echo "success";
     die();
 }

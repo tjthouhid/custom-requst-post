@@ -1,8 +1,8 @@
 <?php
 /*
-Plugin Name: Request with Custom Fields
+Plugin Name: Custom Product Request
 Description:  Custom Product Request from user.
-Version:      3.1.5
+Version:      1.0.2
 Author:       Tj Thouhid
 Author URI:   https://www.tjthouhid.com/
 */

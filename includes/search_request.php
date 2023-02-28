@@ -138,7 +138,8 @@ class gdSearchRequest {
                     $customer['site_url'] = 'https://greendoors.co.uk';
                     // $r = pr_Email::email_message($customer);
                     // echo($r);
-                    wp_mail( ['sales@usedupvc.co.uk', $email], 'You have a product!',   pr_Email::email_message($customer) );
+                    wp_mail( ['sales@usedupvc.co.uk', $email], 'You have a product!',   (new pr_Email)->email_message($customer) );
+                    //wp_mail( ['sales@usedupvc.co.uk', $email], 'You have a product!',   pr_Email::email_message($customer) );
                 }
             }
         }
@@ -177,7 +178,8 @@ class gdSearchRequest {
                  //echo "<pre>";
                     //print_r($customer[$i]);
                 // $this->check_for_products($customer[$i]);
-                gdSearchRequest::check_for_products($customer[$i]);
+                //gdSearchRequest::check_for_products($customer[$i]);
+                (new gdSearchRequest)->check_for_products($customer[$i]);
                
              }
             $i++;

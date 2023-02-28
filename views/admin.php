@@ -98,8 +98,8 @@ add_filter('handle_bulk_actions-edit-gd_request_post', function($redirect_url, $
             $customer['found'] = get_post_meta($id, 'found', true);
             $customer['date_override'] = 'all';
             
-        
-            gdSearchRequest::check_for_products($customer);
+            (new gdSearchRequest)->check_for_products($customer);
+            //gdSearchRequest::check_for_products($customer);
 		}
 		$redirect_url = add_query_arg('check', count($post_ids), $redirect_url);
 	}
