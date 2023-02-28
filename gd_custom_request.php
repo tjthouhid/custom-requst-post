@@ -74,13 +74,32 @@ function request_information_box_callback( $post ) {
   $min_height = get_post_meta($post->ID, 'min_height', true);
   $max_height = get_post_meta($post->ID, 'max_height', true);
   $emailed = get_post_meta($post->ID, 'emailed', true);
+  $notes = get_post_meta($post->ID, 'notes', true);
 ?>
 <style>
   .request_table{
     width : 100%;
+    border-spacing: 0px;
+  }
+  .request_table tr{}
+  .request_table tr th{
+    padding: 10px 20px;
+    width: 20%;
+    text-align: right;
+    border-bottom: 2px solid #e1dede;
+    border-right: 2px solid #e1dede;
+  }
+  .request_table tr td{
+    padding: 10px 20px;
+    border-bottom: 2px solid #e1dede;
+  }
+  .request_table tr td textarea{
+    resize: none;
+    width: 50%;
+    height: 200px;
   }
 </style>
-<table class="request_table" border="1">
+<table class="request_table" colspassing>
   <tbody>
     <tr>
       <th>Name</th>
@@ -132,6 +151,12 @@ function request_information_box_callback( $post ) {
       <input type="radio" name="emailed" value ="1" <?php if($emailed){ echo "checked";}?>> Yes
       <input type="radio" name="emailed" value ="0" <?php if(!$emailed){ echo "checked";}?>> No
     </tr>
+    <tr>
+      <th>Notes</th>
+      <td>
+        <textarea name="notes" id="notes"><?php echo $notes;?></textarea>
+      </td>
+    </tr>
   </tbody>
 </table>
 <?php
@@ -165,10 +190,12 @@ function save_request_information_meta_box_data( $post_id ) {
     return;
   }
   $emailed = sanitize_text_field( $_POST['emailed'] );
+  $notes = sanitize_text_field( $_POST['notes'] );
   
 
     // Update the meta field in the database.
     update_post_meta( $post_id, 'emailed', $emailed );
+    update_post_meta( $post_id, 'notes', $notes );
 }
 
 add_action( 'save_post', 'save_request_information_meta_box_data' );

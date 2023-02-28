@@ -6,7 +6,7 @@ Here User can request for product and it will ssend email when product available
 For Adding to modal 
 
 ```html
-<div class="modal fade" id="request_Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="request_Modal" tabindex="-1" aria-labelledby="request_Modal" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered" >
     <div class="modal-content">
       <div class="modal-header">

@@ -4,19 +4,19 @@ function add_gd_request_columns_to_admin($columns) {
     $columns['name'] = __('Name');
     $columns['email'] = __('Email');
     $columns['phone'] = __('Phone');
-    $columns['type'] = __('Type');
-    $columns['color'] = __('Color');
+   // $columns['type'] = __('Type');
+   // $columns['color'] = __('Color');
     $columns['width'] = __('Width');
-    $columns['min_width'] = __('Min Width');
-    $columns['max_width'] = __('Max Width');
-    $columns['min_width'] = __('Min Width');
-    $columns['min_width'] = __('Min Width');
+   // $columns['min_width'] = __('Min Width');
+   // $columns['max_width'] = __('Max Width');
+
     $columns['height'] = __('Height');
-    $columns['min_height'] = __('Min Height');
-    $columns['max_height'] = __('Max Height');
+    //$columns['min_height'] = __('Min Height');
+   // $columns['max_height'] = __('Max Height');
     $columns['emailed'] = __('Emailed');
     $columns['found'] = __('Found');
     $columns['products'] = __('Products');
+    $columns['notes'] = __('Notes');
     $columns['check'] = __('Check');
     return $columns;
   }
@@ -59,6 +59,9 @@ function add_gd_request_columns_to_admin($columns) {
     } 
     elseif ($column_name === 'check') {
         echo '<a class="do-check" href="#" data-id="'.$post_id.'">Check</a>';
+    } 
+    elseif ($column_name === 'notes') {
+        echo get_post_meta($post_id, 'notes', true);
     } 
   }
   add_action('manage_gd_request_post_posts_custom_column', 'populate_gd_request_columns', 10, 2);
