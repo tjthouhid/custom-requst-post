@@ -1,12 +1,14 @@
 <?php 
+define('CUSTOM_REQUEST_PLUGIN_DIR', plugin_dir_path(dirname( __FILE__ )));
+
 global $wpdb; 
+
 class gdSearchRequest {
     public function __construct()
     {
     }
 
-    function check_for_products($customer)
-    {
+    function check_for_products($customer){
 
         
         $id = $customer['id'];
@@ -37,15 +39,17 @@ class gdSearchRequest {
         if($type != '') {
             $args['product_cat'] = $type;
         }
-    
-        $args['meta_query'][] = array(
-            array(
-                'key' => '_width',
-                'value' => array($min_width, $max_width),
-                'compare' => 'BETWEEN',
-                'type' => 'DECIMAL(10,4)'
-            ),
-        );
+        
+        if($width) {
+            $args['meta_query'][] = array(
+                array(
+                    'key' => '_width',
+                    'value' => array($min_width, $max_width),
+                    'compare' => 'BETWEEN',
+                    'type' => 'DECIMAL(10,4)'
+                ),
+            );
+        }
 
         if($height) {
             $args['meta_query'][0][] = array(
@@ -95,7 +99,8 @@ class gdSearchRequest {
 
         if($product_info->found_posts) {
        
-            $customer['found'] = $product_info->found_posts;
+            
+            $found = 0;
 
 
             if($customer['emailed'] == 1){
@@ -109,7 +114,7 @@ class gdSearchRequest {
                     
 
                     if (!in_array(get_the_id(), $products_already_asigned)) {
-
+                        $found ++;
 
                         $customer['products'] .= get_the_id() . ',';
 
@@ -130,20 +135,60 @@ class gdSearchRequest {
                
 
                
-                    update_post_meta($id, 'found', $customer['found']);
-                    update_post_meta($id, 'products', $customer['products']);
+                update_post_meta($id, 'found', $customer['found']+$found);
+                update_post_meta($id, 'products', $customer['products']);
                     
 
                 if($send_email){
-                    $customer['site_url'] = 'https://greendoors.co.uk';
-                    // $r = pr_Email::email_message($customer);
-                    // echo($r);
-                    wp_mail( ['sales@usedupvc.co.uk', $email], 'You have a product!',   (new pr_Email)->email_message($customer) );
-                    //wp_mail( ['sales@usedupvc.co.uk', $email], 'You have a product!',   pr_Email::email_message($customer) );
+                    $customer['site_url'] = site_url();
+                    $customer['found'] = $found;
+                    
+                    $email = "sales@usedupvc.co.uk,".$email;
+                    //$email = $email;
+                    $this->send_custom_email($email, $customer);
+                    
+                   
                 }
             }
         }
     }
+
+    function send_custom_email($email, $customer) {
+        $recipient = $email;
+        $subject = 'You have a product!';
+        $template_path = '';
+        $default_path = untrailingslashit( CUSTOM_REQUEST_PLUGIN_DIR ) .'/';
+        $template_html = 'views/email-template.php';
+        $template_plain = 'emails/plain/customer-processing-order.php';
+
+        $email_heading = "We found some products for you!";
+        $email_content =  wc_get_template_html(
+            $template_html,
+            array(
+                'customer' => $customer,
+                'email' => $recipient,
+                'email_heading' => $email_heading,
+            ),
+            $template_path,
+            $default_path
+        );
+
+
+        // Load the WooCommerce email classes
+        if ( ! class_exists( 'WC_Email' ) ) {
+            include_once WC_ABSPATH . 'includes/emails/class-wc-email.php';
+        }
+        $email_object = new WC_Email();
+        $email_content = $email_object->style_inline( $email_content );
+        add_filter('wp_mail_content_type', function( $content_type ) {
+            return 'text/html';
+        });
+        wp_mail( $recipient, $subject,   $email_content);
+    }
+
+
+    
+    
 
     // checks all but restricts to date as its not defined
     function checkAll() {
@@ -175,10 +220,6 @@ class gdSearchRequest {
             $customer[$i]['found'] = get_post_meta($result->ID, 'found', true);
             if($customer[$i]['emailed'] == 1){
                
-                 //echo "<pre>";
-                    //print_r($customer[$i]);
-                // $this->check_for_products($customer[$i]);
-                //gdSearchRequest::check_for_products($customer[$i]);
                 (new gdSearchRequest)->check_for_products($customer[$i]);
                
              }

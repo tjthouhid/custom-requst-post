@@ -13,8 +13,8 @@ function add_gd_request_columns_to_admin($columns) {
     $columns['height'] = __('Height');
     //$columns['min_height'] = __('Min Height');
    // $columns['max_height'] = __('Max Height');
-    $columns['emailed'] = __('Emailed');
-    $columns['found'] = __('Found');
+    $columns['emailed'] = __('Subscribed');
+    $columns['found'] = __('Product Found');
     $columns['products'] = __('Products');
     $columns['notes'] = __('Notes');
     $columns['check'] = __('Check');
@@ -48,7 +48,12 @@ function add_gd_request_columns_to_admin($columns) {
         echo get_post_meta($post_id, 'max_height', true);
     } 
     elseif ($column_name === 'emailed') {
-        echo get_post_meta($post_id, 'emailed', true);
+        $emailed =  get_post_meta($post_id, 'emailed', true);
+        if($emailed == 0){
+            echo '<span style="color:red;">No</span>';
+        }else{
+            echo '<span style="color:green;">yes</span>';
+        }
     } 
     elseif ($column_name === 'found') {
         echo get_post_meta($post_id, 'found', true);

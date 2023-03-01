@@ -7,7 +7,7 @@ Author:       Tj Thouhid
 Author URI:   https://www.tjthouhid.com/
 */
 
-require 'includes/email.php';
+//require 'includes/email.php';
 if ( ! defined( '_GD_REQUEST_VERSION' ) ) {
 	// Replace the version number of the plugin on each release.
 	define( '_GD_REQUEST_VERSION', '1.0.1' );
@@ -75,6 +75,8 @@ function request_information_box_callback( $post ) {
   $max_height = get_post_meta($post->ID, 'max_height', true);
   $emailed = get_post_meta($post->ID, 'emailed', true);
   $notes = get_post_meta($post->ID, 'notes', true);
+  $found = get_post_meta($post->ID, 'found', true);
+  $products = get_post_meta($post->ID, 'products', true);
 ?>
 <style>
   .request_table{
@@ -146,7 +148,15 @@ function request_information_box_callback( $post ) {
       <td><?php echo $max_height;?>cm</td>
     </tr>
     <tr>
-      <th>Emailed</th>
+      <th>Product Found</th>
+      <td><?php echo $found;?></td>
+    </tr>
+    <tr>
+      <th>Products</th>
+      <td><?php echo $products;?></td>
+    </tr>
+    <tr>
+      <th>Subscribed</th>
       <td>
       <input type="radio" name="emailed" value ="1" <?php if($emailed){ echo "checked";}?>> Yes
       <input type="radio" name="emailed" value ="0" <?php if(!$emailed){ echo "checked";}?>> No

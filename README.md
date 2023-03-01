@@ -5,6 +5,11 @@ Here User can request for product and it will ssend email when product available
 
 For Adding to modal 
 
+
+
+```diff
+************** Woocomerce is Required.
+```
 ```html
 <div class="modal fade" id="request_Modal" tabindex="-1" aria-labelledby="request_Modal" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered" >
@@ -35,4 +40,5 @@ gd_check_request_product
 ## License
 
 [Tj Thouhid](https://github.com/tjthouhid/custom-requst-post/)
+
 
