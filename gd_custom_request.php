@@ -2,7 +2,7 @@
 /*
 Plugin Name: Custom Product Request
 Description:  Custom Product Request from user.
-Version:      1.0.2
+Version:      1.0.3
 Author:       Tj Thouhid
 Author URI:   https://www.tjthouhid.com/
 */
@@ -10,7 +10,7 @@ Author URI:   https://www.tjthouhid.com/
 //require 'includes/email.php';
 if ( ! defined( '_GD_REQUEST_VERSION' ) ) {
 	// Replace the version number of the plugin on each release.
-	define( '_GD_REQUEST_VERSION', '1.0.1' );
+	define( '_GD_REQUEST_VERSION', '1.0.3' );
 }
 
 function create_gd_request_post_type() {

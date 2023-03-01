@@ -60,6 +60,7 @@ jQuery(function($){
                 $button.removeAttr('disabled');
                 //console.log(response);
                 $(".gd_request_thankyou").fadeIn();
+                $('.request-form .container').fadeOut();
                 $('form#gd_product_request_form')[0].reset();
             }
         });
@@ -72,6 +73,7 @@ jQuery(function($){
         $(".error_gd_r_msg").fadeOut();
         $(".gd_request_thankyou").fadeOut();
         $('form#gd_product_request_form')[0].reset();
+        $('.request-form .container').fadeIn();
     });
 
     if (window.location.href.indexOf('?removeemail=') > 0) {
