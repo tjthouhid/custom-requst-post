@@ -125,6 +125,7 @@ class gdSearchRequest {
                             'width' => $product->get_width(),
                             'height' => $product->get_height(),
                             'image' => get_the_post_thumbnail_url(get_the_ID(), 'product_thumb'),
+                           // 'image' => "http://green-doors.test/wp-content/uploads/2023/01/p-1-389x389.jpeg",
                             'url' => get_permalink()
                         ];
                     }
@@ -180,10 +181,15 @@ class gdSearchRequest {
         }
         $email_object = new WC_Email();
         $email_content = $email_object->style_inline( $email_content );
+        $get_headers = $email_object->get_headers();
+        $get_attachments = $email_object->get_attachments();
+        // $r = $email_object->send( $recipient, $subject, $email_content, $get_headers, $get_attachments );
+         //print_r($email_content);
+         //exit;
         add_filter('wp_mail_content_type', function( $content_type ) {
             return 'text/html';
         });
-        wp_mail( $recipient, $subject,   $email_content);
+        wp_mail( $recipient, $subject, $email_content,$get_headers, $get_attachments);
     }
 
 

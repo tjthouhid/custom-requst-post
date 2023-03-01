@@ -55,7 +55,7 @@ $text_align = is_rtl() ? 'right' : 'left';
             ?>
                 <tr class="">
                     <td class="td" style="text-align:<?php echo esc_attr( $text_align ); ?>; vertical-align: middle; font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif; word-wrap:break-word;">
-                        <img style="background: #365749; padding: 6px 12px; color: #fff; text-decoration: none display: block; width: auto; max-height: 260px;" src="' . $product['image'] . '" alt="Product image" />
+                        <!-- <img style="background: #365749; padding: 6px 12px; color: #fff; text-decoration: none display: block; width: auto; max-height: 260px;" src="<?php //echo $product['image'];?>" alt="Product image" /> -->
                         <br>
                         <?php echo wp_kses_post($product['title']);?>
                     </td>
